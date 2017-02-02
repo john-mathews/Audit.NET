@@ -83,7 +83,8 @@ namespace Audit.EntityFramework
         /// </summary>
         private static string GetEntityName(IEntityType entityType)
         {
-            return entityType.SqlServer().TableName ?? entityType.Name;
+            var tableName = entityType.Name.Split('.');
+            return tableName[tableName.Length - 1];
         }
         /// <summary>
         /// Gets the primary key values for an entity

@@ -11,6 +11,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Audit.EntityFramework.ConfigurationApi;
 using Audit.Core.Extensions;
+using System.Collections.Concurrent;
 #if NETCOREAPP1_0
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -75,7 +76,7 @@ namespace Audit.EntityFramework
         // Entities Include/Ignore attributes cache
         private static readonly Dictionary<Type, bool?> EntitiesIncludeIgnoreAttrCache = new Dictionary<Type, bool?>();
         // AuditDbContext Attribute cache
-        private static Dictionary<Type, AuditDbContextAttribute> _auditAttributeCache = new Dictionary<Type, AuditDbContextAttribute>();
+        private static ConcurrentDictionary<Type, AuditDbContextAttribute> _auditAttributeCache = new ConcurrentDictionary<Type, AuditDbContextAttribute>();
         // User defined fields that will be stored as Custom Fields on the audit event
         private Dictionary<string, object> _extraFields;
         #endregion
